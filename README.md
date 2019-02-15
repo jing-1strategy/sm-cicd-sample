@@ -147,8 +147,8 @@ This is a sample project shows you how to create a complete, end-to-end continuo
     * Project name: CICD-CodeBuild-Project
 
 1. Add deploy stage
-    * Deploy provider: AWS CodeDeploy
-    * Application name: CICD-CodeDeploy-Application
-    * Deployment group: CICD-DeploymentGroup
+    * Deploy provider: Amazon ECS (Blue/Green)
+    * AWS CodeDeploy application name: CICD-CodeDeploy-Application
+    * AWS CodeDeploy deployment group: CICD-DeploymentGroup
 
 1. Review and Create Pipeline.
