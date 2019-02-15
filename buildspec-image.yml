@@ -15,7 +15,3 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 486790186775.dkr.ecr.us-east-1.amazonaws.com/cicd-demo:latest
-artifacts:
-  files:
-    - '**/*'
-  discard-paths: no
