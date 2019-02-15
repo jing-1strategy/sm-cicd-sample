@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - pip install pipenv
+      - pip3 install pipenv
       - pipenv install --system --deploy
   pre_build:
     commands:
