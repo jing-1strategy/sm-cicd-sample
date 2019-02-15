@@ -15,7 +15,6 @@ This is a sample project shows you how to create a complete, end-to-end continuo
       ```
       echo -n | openssl s_client -connect code.corp.surveymonkey.com:443 \
     | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ~/githubcert.pem
-
       ```
 1. Upload your certificate file to an Amazon S3 bucket which in the same AWS region as your builds.
 
