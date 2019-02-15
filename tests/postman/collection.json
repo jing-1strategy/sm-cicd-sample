@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "94603a0d-a666-4c36-8de4-f2973849026b",
+		"name": "flaskblog-integrated-testing",
+		"description": "integrated testing for flaskblog application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "homepage-testing-request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48779040-cd0a-4cf9-94d8-4533ed9288c4",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BASE_URL}}",
+					"host": [
+						"{{BASE_URL}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "flaskblog-testing-request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}",
+							"host": [
+								"{{BASE_URL}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 13 Feb 2019 00:11:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "5658"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.14.1 Python/2.7.15rc1"
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"utf-8\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <title>1Strategy Blog</title>\n        <!-- Latest compiled and minified CSS -->\n        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"\n        integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">\n        <link rel=\"stylesheet\" type=\"text/css\" href=\"/static/main.css\">\n    </head>\n    <body>\n        <header class=\"site-header\">\n            <nav class=\"navbar navbar-expand-md navbar-dark bg-steel fixed-top\">\n                <div class=\"container\">\n                    <a class=\"navbar-brand mr-4\" href=\"/\">1Strategy Blog</a>\n                    <div class=\"navbar-brand mr-4\" id=\"navbarToggle\">\n                        <div class=\"navbar-nav mr-auto\">\n                            <a class=\"nav-item nav-link\" href=\"/\">Home</a>\n                            <a class=\"nav-item nav-link\" href=\"/about\">About</a>\n                        </div>\n                    </div>\n                </div>\n            </nav>\n        </header>\n        <main role=\"main\" class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-8\">\n                    <article class=\"media content-section\">\n                        <div class=\"media-body\">\n                            <div class=\"article-metadata\">\n                                <a class=\"mr-2\" href=\"#\">Anthony Roberson</a>\n                                <small class=\"text-muted\">February 6th, 2019</small>\n                            </div>\n                            <h2>\n                                <a class=\"article-title\" href=\"#\">Connecting to an RDS Database with Lambda</a>\n                            </h2>\n                            <p class=\"article-content\">This article will detail deploying a Lambda function written in .NET Core C# that connects to an RDS database, selects some data, and returns the output in JSON format.</p>\n                        </div>\n                    </article>\n                    <article class=\"media content-section\">\n                        <div class=\"media-body\">\n                            <div class=\"article-metadata\">\n                                <a class=\"mr-2\" href=\"#\">Andrew Clark</a>\n                                <small class=\"text-muted\">December 12th, 2018</small>\n                            </div>\n                            <h2>\n                                <a class=\"article-title\" href=\"#\">Global Accelerator</a>\n                            </h2>\n                            <p class=\"article-content\">Among the many announcements at this year AWS re:Invent conference was a new service: Global Accelerator.</p>\n                        </div>\n                    </article>\n                    <article class=\"media content-section\">\n                        <div class=\"media-body\">\n                            <div class=\"article-metadata\">\n                                <a class=\"mr-2\" href=\"#\">Jameson Ricks</a>\n                                <small class=\"text-muted\">December 11th, 2018</small>\n                            </div>\n                            <h2>\n                                <a class=\"article-title\" href=\"#\">Creating Dynamic Scripts using EC2 Metadata</a>\n                            </h2>\n                            <p class=\"article-content\">CloudFormation templates, when written with portability in mind, allow you to write one template and deploy it multiple times in many different environments.</p>\n                        </div>\n                    </article>\n                    <article class=\"media content-section\">\n                        <div class=\"media-body\">\n                            <div class=\"article-metadata\">\n                                <a class=\"mr-2\" href=\"#\">Justin Iravani</a>\n                                <small class=\"text-muted\">November 13th, 2018</small>\n                            </div>\n                            <h2>\n                                <a class=\"article-title\" href=\"#\">AWS Governance Must-Dos</a>\n                            </h2>\n                            <p class=\"article-content\">Each company has its own journey to the cloud. Some companies are born in the cloud; others migrate there over time.</p>\n                        </div>\n                    </article>\n                    <article class=\"media content-section\">\n                        <div class=\"media-body\">\n                            <div class=\"article-metadata\">\n                                <a class=\"mr-2\" href=\"#\">Pavel Yarema</a>\n                                <small class=\"text-muted\">October 30th, 2018</small>\n                            </div>\n                            <h2>\n                                <a class=\"article-title\" href=\"#\">How to Copy Encrypted S3 Objects Across Accounts</a>\n                            </h2>\n                            <p class=\"article-content\">Despite Amazon S3 being only an object store storage solution, this service can be leveraged to support some pretty complex architectural designs and business requirements.</p>\n                        </div>\n                    </article>\n                </div>\n                <div class=\"col-md-4\">\n                    <div class=\"content-section\">\n                        <h3>Our Sidebar</h3>\n                        <p class='text-muted'>You can put any information here you'd like.\n                        \n                            <ul class=\"list-group\">\n                                <li class=\"list-group-item list-group-item-light\">Latest Posts</li>\n                                <li class=\"list-group-item list-group-item-light\">Announcements</li>\n                                <li class=\"list-group-item list-group-item-light\">Calendars</li>\n                                <li class=\"list-group-item list-group-item-light\">etc</li>\n                            </ul>\n                        </p>\n                    </div>\n                </div>\n            </div>\n        </main>\n        <!-- Latest compiled and minified JavaScript -->\n        <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"\n        integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\"\n        crossorigin=\"anonymous\">\n    </script>\n    </body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "aboutpage-testing-request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a301a71-861c-4e1a-beb7-14e6f0134dcd",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/about",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"about"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
