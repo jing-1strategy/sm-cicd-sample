@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "BASE_URL",
-			"value": "http://mu-load-Elb-HLQVUBBOGNOT-1641887013.us-east-1.elb.amazonaws.com",
+			"value": "cicd-demo-alb-1951725897.us-east-1.elb.amazonaws.com",
 			"type": "text",
 			"description": "",
 			"enabled": true
