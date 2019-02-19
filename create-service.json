@@ -1,5 +1,5 @@
 {
-    "taskDefinition": "cicd-demo:1",
+    "taskDefinition": "cicd-demo:6",
     "cluster": "CICD-DEMO",
     "loadBalancers": [
         {
