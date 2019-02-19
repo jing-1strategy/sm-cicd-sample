@@ -144,27 +144,71 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 1. Create a CodeCommit repository: e.g.SM-Github-CICD-Pipeline
 1. Push appspec.yaml and taskdef.json to your CodeCommit repository.
 
-## Step 5: Create Continuous Integration Pipeline
+## Step 5: Create a Continuous Integration Pipeline
 
-1. Choose pipeline settings
-    * enter pipeline name as use default settings for other fields
-
-1. Add source stage
-    * Source provider: GitHub
-    * Grant AWS CodePipeline access to your GitHub repository
+1. Go to CodePipeline > Create pipeline:
+    * Pipeline name: CI_Pipeline_Demo
+    * Service role:
+        * Select [New service role]
+        * Role name: accept the default name
+    * Artifact store: Default location
+    * Source provider: Guthub
     * Repository: jing-1strategy/sm-cicd-sample
     * Branch: master
-    * Change detection options: GitHub webhooks
-
-1. Add build stage
+    * Change detection options: GitHub webhooks (recommended)
     * Build provider: AWS CodeBuild
-    * Project name: CICD-CodeBuild-Project
+    * Project name: CICD-CodeBuild-UnitTest
+    * Deploy provider: Skip deploy stage
 
-1. Add deploy stage
-    * Deploy provider: Amazon ECS (Blue/Green)
-    * AWS CodeDeploy application name: CICD-CodeDeploy-Application
-    * AWS CodeDeploy deployment group: CICD-DeploymentGroup
+1. Add build and push docker image stage to the CI pipeline
+    * Choose the CI pipeline. In the upper left, choose Edit.
+    * In the Build stage, choose [Edit stage]
+    * Rename action name from "Build" to "UnitTest"
+    * Add action group after existing action:
+        * Action name: Image
+        * Action provider: AWS CodeBuild
+        * Input artifacts: SourceArtifact
+        * Project name: CICD-CodeBuild-Image
+        * Output artifacts: ImageOutput
 
-1. Review and Create Pipeline.
+1. Save and Release change all the change.
+<img src="./images/CI_Pipeline.png" width="200">
 
-Test: update something.
+## Step 6: Create a Continuous Delivery Pipeline
+1. Go to CodePipeline > Create pipeline:
+    * Pipeline name: CD_Pipeline_Demo
+    * Service role:
+        * Select [New service role]
+        * Role name: accept the default name
+        * Artifact store: Default location
+        * Source provider: CodeCommit
+        * Repository name: SM-Github-CICD-Pipeline
+        * Branch: master
+        * Change detection options: Amazon CloudWatch Events (recommended)
+        * Build Provider: Skip build stage
+        * Deploy Provider: Amazon ECS (Blue/Green)
+        * AWS CodeDeploy application name: CICD-CodeDeploy-Application
+        * AWS CodeDeploy deployment group: CICD-Demo-DeploymentGroup
+        * Amazon ECS task definition:
+            * SourceArtifact: taskdef.json
+            * SourceArtifact: appspec.yaml
+
+1. Add an Amazon ECR source action to your pipeline
+    * Choose your pipeline. In the upper left, choose Edit.
+    * In the source stage, choose Edit stage.
+    * Add a parallel action by choosing + Add action next to your CodeCommit source action.
+    * In Action name, enter a name (for example, ECRImage).
+    * In Action provider, choose Amazon ECR.
+    * In Repository name, choose the name of your Amazon ECR repository.
+    * In Image tag, specify the image name and version, if different from latest.
+    * In Output artifacts, choose the output artifact (for example, ECRImageOutput)
+    * Choose Save
+
+1. Wire your source artifacts to the Deploy action
+    * Choose Edit on your Deploy stage and choose the icon to edit the Amazon ECS (Blue/Green) action.
+    * In Input artifacts, choose Add. Add the source artifact from your new Amazon ECR repository (for example, ECRImageOutput).
+    * In Task Definition, choose SourceArtifact, and then enter taskdef.json.
+    * In AWS CodeDeploy AppSpec File, choose SourceArtifact and enter appspec.yaml.
+    * In Dynamically update task definition image, in Input Artifact with Image URI, choose ECRImageOutput, and then enter the placeholder text that is used in the taskdef.json file: "IMAGE1_NAME". Choose Save.
+
+1. Save and release change to the pipeline.
