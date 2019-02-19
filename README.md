@@ -100,6 +100,7 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
     * Create Application Load Balancer with below settings:
         * Scheme: internet-facing.
+        * Security Group: Open HTTP 80 and HTTP 8080 to 0.0.0.0/0
         * Configure two listener ports for your load balancer:
             * Under Load Balancer Protocol, choose HTTP. Under Load Balancer Port, enter 80
             * Choose Add listener
@@ -116,7 +117,8 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
 1. Create Your Amazon ECS Fargate Cluster and Service
     * Create a ECS Fargate Cluster named CICD-DEMO
-    * Update create-service.json and run the create-service command:
+    * Update create-service.json, for security group, open port 5000 to the ALB security group 
+    * run the create-service command:
 
     ```bash
     aws ecs create-service --service-name cicd-demo-service --cli-input-json file://create-service.json
@@ -175,6 +177,7 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 <img src="./images/CI_Pipeline.png" width="200">
 
 ## Step 6: Create a Continuous Delivery Pipeline
+
 1. Go to CodePipeline > Create pipeline:
     * Pipeline name: CD_Pipeline_Demo
     * Service role:
@@ -210,5 +213,37 @@ This is a sample project shows you how to create a complete, end-to-end continuo
     * In Task Definition, choose SourceArtifact, and then enter taskdef.json.
     * In AWS CodeDeploy AppSpec File, choose SourceArtifact and enter appspec.yaml.
     * In Dynamically update task definition image, in Input Artifact with Image URI, choose ECRImageOutput, and then enter the placeholder text that is used in the taskdef.json file: "IMAGE1_NAME". Choose Save.
+
+1. Save and release change to the pipeline.
+
+## Step 7: Add Integration Testing to the Continuous Delivery Pipeline
+
+1. Create CodeBuild Project with below settings: (e.g. CICD-CodeBuild-IntTest)
+
+    * Source provider: GitHub
+    * Github repository: jing-1strategy/sm-cicd-sample
+    * Select Rebuild every time a code change is pushed to this repository
+    * Event type: PUSH (or others depends on the requirement)
+    * Environment:
+        * choose Managed image
+        * Operating system: Ubuntu
+        * Runtime: Node.js
+        * Runtime version: aws/codebuild/nodejs:10.14.1
+    * Service Role:
+        * Select [New service role]
+        * Role name: accept the default name.
+    * Buildspec
+        * Use a buildspec file.
+        * Buildspec name: buildspec-integration-test.yml
+
+1. Add Integration Test Stage to the pipeline
+    * Choose your pipeline. In the upper left, choose Edit.
+    * Click [Add stage] under Deploy stage, enter name "Test"
+    * Add action group to Test stage:
+        * Action name: IntegrationTesting
+        * Action Provider: AWS CodeBuild
+        * Input artifacts: SourceArtifact
+        * Project name: CICD-CodeBuild-IntTest
+        * Output artifacts: IntTestOutput
 
 1. Save and release change to the pipeline.

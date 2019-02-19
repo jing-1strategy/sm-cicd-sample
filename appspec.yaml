@@ -6,5 +6,5 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-          ContainerName: "cicd-demo"
+          ContainerName: "cicd-demo-container"
           ContainerPort: 5000
