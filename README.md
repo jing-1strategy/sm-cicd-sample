@@ -78,7 +78,37 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
     ```
 
-## Step 3: Create CodeDeploy Application and Deployment Group (Fargate Compute Platform)
+## Step 3: Create a Continuous Integration Pipeline
+
+1. Go to CodePipeline > Create pipeline:
+    * Pipeline name: CI_Pipeline_Demo
+    * Service role:
+        * Select [New service role]
+        * Role name: accept the default name
+    * Artifact store: Default location
+    * Source provider: Guthub
+    * Repository: jing-1strategy/sm-cicd-sample
+    * Branch: master
+    * Change detection options: GitHub webhooks (recommended)
+    * Build provider: AWS CodeBuild
+    * Project name: CICD-CodeBuild-UnitTest
+    * Deploy provider: Skip deploy stage
+
+1. Add build and push docker image stage to the CI pipeline
+    * Choose the CI pipeline. In the upper left, choose Edit.
+    * In the Build stage, choose [Edit stage]
+    * Rename action name from "Build" to "UnitTest"
+    * Add action group after existing action:
+        * Action name: Image
+        * Action provider: AWS CodeBuild
+        * Input artifacts: SourceArtifact
+        * Project name: CICD-CodeBuild-Image
+        * Output artifacts: ImageOutput
+
+1. Save and Release change all the change.
+<img src="./images/CI_Pipeline.png" width="200">
+
+## Step 4: Create CodeDeploy Application and Deployment Group (Fargate Compute Platform)
 
 1. Update a task definition JSON file and register it with Amazon ECS
 
@@ -117,7 +147,7 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
 1. Create Your Amazon ECS Fargate Cluster and Service
     * Create a ECS Fargate Cluster named CICD-DEMO
-    * Update create-service.json, for security group, open port 5000 to the ALB security group 
+    * Update create-service.json, for security group, open port 5000 to the ALB security group
     * run the create-service command:
 
     ```bash
@@ -141,40 +171,15 @@ This is a sample project shows you how to create a complete, end-to-end continuo
         * Target group 2 name: cicd-demo-tg-2
         * Deployment settings: Reroute traffic immediately
 
-## Step 4: Create a CodeCommit Repository and push appspec.yaml and taskdef.json to it
+## Step 5: Create a CodeCommit Repository and push configuration files of CD pipeline to it
 
 1. Create a CodeCommit repository: e.g.SM-Github-CICD-Pipeline
-1. Push appspec.yaml and taskdef.json to your CodeCommit repository.
-
-## Step 5: Create a Continuous Integration Pipeline
-
-1. Go to CodePipeline > Create pipeline:
-    * Pipeline name: CI_Pipeline_Demo
-    * Service role:
-        * Select [New service role]
-        * Role name: accept the default name
-    * Artifact store: Default location
-    * Source provider: Guthub
-    * Repository: jing-1strategy/sm-cicd-sample
-    * Branch: master
-    * Change detection options: GitHub webhooks (recommended)
-    * Build provider: AWS CodeBuild
-    * Project name: CICD-CodeBuild-UnitTest
-    * Deploy provider: Skip deploy stage
-
-1. Add build and push docker image stage to the CI pipeline
-    * Choose the CI pipeline. In the upper left, choose Edit.
-    * In the Build stage, choose [Edit stage]
-    * Rename action name from "Build" to "UnitTest"
-    * Add action group after existing action:
-        * Action name: Image
-        * Action provider: AWS CodeBuild
-        * Input artifacts: SourceArtifact
-        * Project name: CICD-CodeBuild-Image
-        * Output artifacts: ImageOutput
-
-1. Save and Release change all the change.
-<img src="./images/CI_Pipeline.png" width="200">
+1. Push below files to your CodeCommit repository:
+    * appspec.yaml
+    * taskdef.json
+    * buildspec-integration-test.yml
+    * /tests/*
+    * Note: please update the value of BASE_URL with ALB DNS name, this is the endpoint for the integration testing
 
 ## Step 6: Create a Continuous Delivery Pipeline
 
@@ -216,14 +221,18 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
 1. Save and release change to the pipeline.
 
+1. After the traffic is routed to replacement task set, click [Terminate original task set], so you don't have to wait for time out:
+
+<img src="./images/codedeploy.png" width="800">
+
 ## Step 7: Add Integration Testing to the Continuous Delivery Pipeline
+
+1. Copy and paste buildspec-integration-test.yml to codecommit repo
 
 1. Create CodeBuild Project with below settings: (e.g. CICD-CodeBuild-IntTest)
 
-    * Source provider: GitHub
-    * Github repository: jing-1strategy/sm-cicd-sample
-    * Select Rebuild every time a code change is pushed to this repository
-    * Event type: PUSH (or others depends on the requirement)
+    * Source provider: CodeCommit
+    * Github repository: SM-Github-CICD-Pipeline
     * Environment:
         * choose Managed image
         * Operating system: Ubuntu
@@ -247,3 +256,5 @@ This is a sample project shows you how to create a complete, end-to-end continuo
         * Output artifacts: IntTestOutput
 
 1. Save and release change to the pipeline.
+
+1. Make a change to the source repo and push to github, the CD pipeline should be up:

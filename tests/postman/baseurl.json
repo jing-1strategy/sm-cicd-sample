@@ -1,0 +1,16 @@
+{
+	"id": "538d85dd-5338-4349-ad0f-d61569f89bf5",
+	"name": "baseurl",
+	"values": [
+		{
+			"key": "BASE_URL",
+			"value": "http://mu-load-Elb-HLQVUBBOGNOT-1641887013.us-east-1.elb.amazonaws.com",
+			"type": "text",
+			"description": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-02-19T19:02:28.402Z",
+	"_postman_exported_using": "Postman/6.5.3"
+}
