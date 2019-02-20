@@ -12,7 +12,7 @@ This is a sample project shows you how to create a complete, end-to-end continuo
         * repo:status: Grants access to commit statuses.
         * admin:repo_hook: Grants full control of repository hooks. This scope is not required if your token has the repo scope.
     * Copy it to your clipboard so that it can be used when you create your CodeBuild project.
-1. Create an image repository in Amazon ECR named "cicd-demo" and update buildspec.yml with push commands to this repo.
+1. Create an image repository in Amazon ECR named "cicd-demo" and update buildspec-image.yml with push commands to this repo.
 
 ## Step 1: Create a CodeBuild Project for Unit Test
 
@@ -173,13 +173,15 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
 ## Step 5: Create a CodeCommit Repository and push configuration files of CD pipeline to it
 
-1. Create a CodeCommit repository: e.g.SM-Github-CICD-Pipeline
+1. Create a CodeCommit repository: e.g.CICD-Demo-CodeDeploy-Config
 1. Push below files to your CodeCommit repository:
     * appspec.yaml
     * taskdef.json
     * buildspec-integration-test.yml
+    * create-service.json
     * /tests/*
-    * Note: please update the value of BASE_URL with ALB DNS name, this is the endpoint for the integration testing
+
+Note: please update the value of BASE_URL with ALB DNS name, this is the endpoint for the integration testing
 
 ## Step 6: Create a Continuous Delivery Pipeline
 

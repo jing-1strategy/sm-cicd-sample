@@ -3,7 +3,7 @@
     "cluster": "CICD-DEMO",
     "loadBalancers": [
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:486790186775:targetgroup/cicd-demo-tg-1/934444cc91611a67",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-2:486790186775:targetgroup/cicd-demo-tg01/a70654fd731d7f59",
             "containerName": "cicd-demo-container",
             "containerPort": 5000
         }
@@ -17,12 +17,12 @@
     "networkConfiguration": {
         "awsvpcConfiguration": {
             "subnets": [
-                "subnet-023088150d583f62b",
-                "subnet-06831223246fb2c3a",
-                "subnet-0a224af797ca9d763"
+                "subnet-0fea245405783c9b7",
+                "subnet-023ba2152519c8afb",
+                "subnet-0119352acbafb9079"
             ],
             "securityGroups": [
-                "sg-082a30d1bd85be065"
+                "sg-0148214ce9429db32"
             ],
             "assignPublicIp": "DISABLED"
         }
