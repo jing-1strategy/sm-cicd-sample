@@ -259,4 +259,4 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
 1. Make a change to the source repo and push to github, the CD pipeline should be up:
 
-[To Be Deleted]Test Content.
+[To Be Deleted]Test Content02.
