@@ -192,7 +192,7 @@ Note: please update the value of BASE_URL with ALB DNS name, this is the endpoin
         * Role name: accept the default name
         * Artifact store: Default location
         * Source provider: CodeCommit
-        * Repository name: SM-Github-CICD-Pipeline
+        * Repository name: CICD-Demo-CodeDeploy-Config
         * Branch: master
         * Change detection options: Amazon CloudWatch Events (recommended)
         * Build Provider: Skip build stage
@@ -234,7 +234,7 @@ Note: please update the value of BASE_URL with ALB DNS name, this is the endpoin
 1. Create CodeBuild Project with below settings: (e.g. CICD-CodeBuild-IntTest)
 
     * Source provider: CodeCommit
-    * Github repository: SM-Github-CICD-Pipeline
+    * Github repository: CICD-Demo-CodeDeploy-Config
     * Environment:
         * choose Managed image
         * Operating system: Ubuntu
@@ -261,4 +261,4 @@ Note: please update the value of BASE_URL with ALB DNS name, this is the endpoin
 
 1. Make a change to the source repo and push to github, the CD pipeline should be up:
 
-[To Be Deleted]Test Content02.
+<img src="./images/CD_Pipeline.png" width="800">
