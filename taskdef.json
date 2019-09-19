@@ -1,5 +1,5 @@
 {
-    "executionRoleArn": "arn:aws:iam::486790186775:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::355189840595:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "cicd-demo-container",
