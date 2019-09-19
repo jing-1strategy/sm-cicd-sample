@@ -26,8 +26,8 @@ This is a sample project shows you how to create a complete, end-to-end continuo
     * Environment:
         * choose Managed image
         * Operating system: Ubuntu
-        * Runtime: Python
-        * Runtime version: aws/codebuild/python:3.7.1
+        * Runtime(s): Standard
+        * Image: aws/codebuild/standard:2.0  
     * Service Role:
         * Select [New service role]
         * Role name: accept the default name.
@@ -46,8 +46,8 @@ This is a sample project shows you how to create a complete, end-to-end continuo
     * Environment:
         * choose Managed image
         * Operating system: Ubuntu
-        * Runtime: Docker
-        * Runtime version: aws/codebuild/docker:18.09.0
+        * Runtime(s): Standard
+        * Image: aws/codebuild/standard:2.0  
     * Service Role:
         * Select [New service role]
         * Role name: accept the default name.
@@ -114,8 +114,8 @@ This is a sample project shows you how to create a complete, end-to-end continuo
 
     * Create ecsTaskExecutionRole with AmazonECSTaskExecutionRolePolicy
 
-    * Update Task Definition Source File (taskdef.json) with ecsTaskExecutionRole arn and ECR image name
-
+    * Update Task Definition Source File (taskdef.json) with ecsTaskExecutionRole arn and ECR image name - "image": "cicd-demo"
+    
     * Register your task definition with the taskdef.json file.
 
     ```bash

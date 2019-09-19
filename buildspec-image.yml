@@ -6,15 +6,15 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t cicd-demo .
-      - docker tag cicd-demo:latest 355189840595.dkr.ecr.us-east-1.amazonaws.com/cicd-demo:latest
+      - docker tag cicd-demo:latest 355189840595.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/cicd-demo:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 355189840595.dkr.ecr.us-east-1.amazonaws.com/cicd-demo:latest
+      - docker push 355189840595.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/cicd-demo:latest
