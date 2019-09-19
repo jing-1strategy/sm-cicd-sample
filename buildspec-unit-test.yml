@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      Python: aws/codebuild/python:3.7.1
+      python: aws/codebuild/python:3.7.1
     commands:
       - pip install pipenv
       - pipenv install --system --deploy
