@@ -262,3 +262,6 @@ Note: please update the value of BASE_URL with ALB DNS name, this is the endpoin
 1. Make a change to the source repo and push to github, the CD pipeline should be up:
 
 <img src="./images/CD_Pipeline.png" width="800">
+
+## Test Content
+Only purpose of this section is make some change to the repo and trigger the pipeline.
