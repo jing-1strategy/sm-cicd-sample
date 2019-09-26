@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 posts = [
     {
-        'author': 'Anthony Roberson',
+        'author': 'Anthony Roberson - V1',
         'title': 'Connecting to an RDS Database with Lambda',
         'content': 'This article will detail deploying a Lambda function written in .NET Core C# that connects to an RDS database, selects some data, and returns the output in JSON format.',
         'date_posted': 'February 6th, 2019'
@@ -34,18 +34,22 @@ posts = [
     }
 ]
 
+
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template('home.html', posts=posts)
 
+
 @app.route("/about")
 def about():
     return render_template('about.html', title='About')
 
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html', title="404 Not Found"), 404
+
 
 @app.errorhandler(500)
 def internal_error(error):
