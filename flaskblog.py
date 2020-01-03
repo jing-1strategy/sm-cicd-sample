@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 posts = [
     {
-        'author': 'Anthony Roberson - V3.0 Demo',
+        'author': 'Anthony Roberson - V1.0 Demo',
         'title': 'Connecting to an RDS Database with Lambda',
         'content': 'This article will detail deploying a Lambda function written in .NET Core C# that connects to an RDS database, selects some data, and returns the output in JSON format.',
         'date_posted': 'February 6th, 2019'
