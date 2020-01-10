@@ -6,5 +6,7 @@ Resources:
       Properties:
         TaskDefinition: <TASK_DEFINITION>
         LoadBalancerInfo:
-          ContainerName: "cicd-demo-container"
+          ContainerName: "fargate-demo-container"
           ContainerPort: 5000
+Hooks:
+  - BeforeAllowTraffic: deployment_testing
