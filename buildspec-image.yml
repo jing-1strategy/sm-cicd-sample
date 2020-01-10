@@ -18,7 +18,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 355189840595.dkr.ecr.us-east-1.amazonaws.com/cicd-demo:latest
-      - printf '{"ImageURI":"355189840595.dkr.ecr.us-east-1.amazonaws.com/cicd-demo@sha256:d1f4c8fbca868d82832ed2aba36f95d8a2f74691918fc24680b548f452465435}' > imageDetail.json
+      - printf '{"ImageURI":"355189840595.dkr.ecr.us-east-1.amazonaws.com/cicd-demo:latest"}' > imageDetail.json
 artifacts:
   files:
     - imageDetail.json
